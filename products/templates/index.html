@@ -1,0 +1,30 @@
+{% extends '_layout.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">Available Cars for Rent</h2>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+        {% for car in cars %}
+        <div class="col">
+            <div class="card h-100 shadow-sm">
+                {% if car.image %}
+                <img src="{{ car.image.url }}" class="card-img-top" alt="{{ car.brand }} {{ car.model }}">
+                {% else %}
+                <img src="https://png.pngtree.com/png-vector/20221125/ourmid/pngtree-no-image-available-icon-flatvector-illustration-picture-coming-creative-vector-png-image_40968940.jpg"
+                     class="card-img-top" alt="No image available">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ car.brand }} {{ car.model }} ({{ car.year }})</h5>
+                    <p class="card-text text-muted">{{ car.description|truncatewords:20 }}</p>
+                    <p class="card-text"><strong>Seats:</strong> {{ car.seats }}</p>
+                    <p class="card-text"><strong>Price:</strong> {{ car.daily_rental_price }}$ / day</p>
+                </div>
+                <div class="card-footer text-center">
+                    <a href="/cart/add/{{ car.id }}" class="btn btn-primary">Add to Cart</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

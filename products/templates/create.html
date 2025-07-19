@@ -1,0 +1,57 @@
+{% extends '_layout.html' %}
+
+{% block content %}
+
+<h2>Create New Car</h2>
+
+<form class="row g-3" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <div class="col-md-6">
+        <label class="form-label">Brand</label>
+        <input type="text" name="brand" class="form-control" placeholder="Enter car brand">
+    </div>
+    <div class="col-md-6">
+        <label class="form-label">Model</label>
+        <input type="text" name="model" class="form-control" placeholder="Enter car model">
+    </div>
+    <div class="col-md-3">
+        <label class="form-label">Price</label>
+        <input type="number" name="daily_rental_price" class="form-control" placeholder="Enter car price">
+    </div>
+    <div class="col-3">
+        <label class="form-label">Year</label>
+        <input type="number" name="year" min="0" class="form-control" placeholder="Enter car year">
+    </div>
+    <div class="col-3">
+        <label class="form-label">Seats</label>
+        <input type="number" name="seats" min="0" class="form-control" placeholder="Enter car seats">
+    </div>
+    <div class="col-3">
+        <label class="form-check-label d-block mb-2">Available</label>
+        <div class="form-check">
+            <input type="checkbox" class="form-check-input" name="is_available" id="is_available"
+                {% if form.is_available.value %}checked{% endif %}>
+            <label class="form-check-label" for="is_available">Yes</label>
+        </div>
+    </div>
+    <div class="col-12">
+        <label class="form-label">Desccription</label>
+        <textarea class="form-control" name="description" rows="3" placeholder="Enter car description"></textarea>
+    </div>
+    
+
+    <div class="col-md-12">
+        <label for="inputCity" class="form-label">Image</label>
+        <input type="file" name="image" class="form-control">
+    </div>
+
+    <div class="col-6">
+        <a href="/list" class="btn btn-dark w-100">Back</a>
+    </div>
+    <div class="col-6">
+        <button type="submit" class="btn btn-success w-100">Create</button>
+    </div>
+</form>
+
+{% endblock %}

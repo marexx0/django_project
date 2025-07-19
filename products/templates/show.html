@@ -1,0 +1,26 @@
+{% extends '_layout.html' %}
+
+{% block content %}
+<div class="container mt-4">
+  <h2>Car Details</h2>
+  <div class="card">
+    <div class="card-header bg-primary text-white">
+      {{ car.brand }} {{ car.model }} ({{ car.year }})
+    </div>
+    <div class="card-body">
+      <p><strong>Description:</strong> {{ car.description|default:"No description" }}</p>
+      <p><strong>Seats:</strong> {{ car.seats }}</p>
+      <p><strong>Daily Rental Price:</strong> ${{ car.daily_rental_price }}</p>
+      <p><strong>Available:</strong> 
+        {% if car.is_available %}
+          <span class="badge bg-success">Yes</span>
+        {% else %}
+          <span class="badge bg-danger">No</span>
+        {% endif %}
+      </p>
+      <a href="/list" class="btn btn-secondary">Back to Catalog</a>
+      <a href="/delete/{{ car.id }}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this car?');">Delete</a>
+    </div>
+  </div>
+</div>
+{% endblock %}
